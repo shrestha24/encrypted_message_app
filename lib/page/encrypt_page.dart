@@ -50,6 +50,9 @@ class EncryptForm extends StatelessWidget {
                 print(result);
                 print(
                     "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
+                var result1 =
+                    await EncrytService().getDecryptedText(result, keyControler.text);
               },
               child: Text("Submit"),
             )
