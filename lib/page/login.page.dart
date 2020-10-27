@@ -1,3 +1,5 @@
+import 'package:encrypted_message_app/page/signup.page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '';
 
@@ -165,6 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(width: 5.0),
               InkWell(
                 onTap: () {
+                  //TODO SEND IT TO HOMEPAGE
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => MyHomePage1()
                   ));

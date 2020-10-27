@@ -1,10 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:encrypted_message_app/services/encrypt_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EncryptForm extends StatelessWidget {
   final msgController = TextEditingController();
+  final phoneController = TextEditingController();
   final keyControler = TextEditingController();
+  final encryptedText = TextEditingController();
   EncryptForm({Key key}) : super(key: key);
+  String text = "Encrypted Text Will Appera here";
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +23,17 @@ class EncryptForm extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: phoneController,
+                decoration: InputDecoration(
+                  hintText: "Enter Phone",
+                  labelText: "Phone",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
@@ -39,23 +56,51 @@ class EncryptForm extends StatelessWidget {
                 ),
               ),
             ),
-            RaisedButton(
-              onPressed: () async {
-                String key1 = 'my 32 length key................';
-                var result = await EncrytService()
-                    .getEncryptedText(msgController.text, keyControler.text);
-                print(
-                    ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RaisedButton(
+                  onPressed: () async {
+                    var uri = 'sms:' +
+                        phoneController.text +
+                        '?body=' +
+                        keyControler.text;
+                    launch(uri);
 
-                print(result);
-                print(
-                    "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                    /* var result1 = await EncrytService()
+                    .getDecryptedText(result, keyControler.text);*/
+                  },
+                  child: Text("Submit"),
+                ),
+                RaisedButton(
+                  onPressed: () async {
+                    var result = await EncrytService().getEncryptedText(
+                        msgController.text, keyControler.text);
 
-                var result1 =
-                    await EncrytService().getDecryptedText(result, keyControler.text);
-              },
-              child: Text("Submit"),
-            )
+                    print(result);
+                    encryptedText.text = result;
+
+                    Timer(Duration(seconds: 2), () {
+                      var uri =
+                          'sms:' + phoneController.text + '?body=' + result;
+                      launch(uri);
+                    });
+                  },
+                  child: Text("Send Encrypted Text"),
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: encryptedText,
+                decoration: InputDecoration(
+                  hintText: "Encrypted Text",
+                  labelText: "Encrypted Text Will Appear Here",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
           ],
         ),
       ),
