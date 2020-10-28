@@ -18,90 +18,92 @@ class EncryptForm extends StatelessWidget {
       appBar: AppBar(
         title: Text("ENCRYPT FORM"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: phoneController,
-                decoration: InputDecoration(
-                  hintText: "Enter Phone",
-                  labelText: "Phone",
-                  border: OutlineInputBorder(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: phoneController,
+                  decoration: InputDecoration(
+                    hintText: "Enter Phone",
+                    labelText: "Phone",
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: msgController,
-                decoration: InputDecoration(
-                  hintText: "Enter String",
-                  labelText: "Message",
-                  border: OutlineInputBorder(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: msgController,
+                  decoration: InputDecoration(
+                    hintText: "Enter String",
+                    labelText: "Message",
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: keyControler,
-                decoration: InputDecoration(
-                  hintText: "Enter key",
-                  labelText: "key",
-                  border: OutlineInputBorder(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: keyControler,
+                  decoration: InputDecoration(
+                    hintText: "Enter key",
+                    labelText: "key",
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RaisedButton(
-                  onPressed: () async {
-                    var uri = 'sms:' +
-                        phoneController.text +
-                        '?body=' +
-                        keyControler.text;
-                    launch(uri);
-
-                    /* var result1 = await EncrytService()
-                    .getDecryptedText(result, keyControler.text);*/
-                  },
-                  child: Text("Submit"),
-                ),
-                RaisedButton(
-                  onPressed: () async {
-                    var result = await EncrytService().getEncryptedText(
-                        msgController.text, keyControler.text);
-
-                    print(result);
-                    encryptedText.text = result;
-
-                    Timer(Duration(seconds: 2), () {
-                      var uri =
-                          'sms:' + phoneController.text + '?body=' + result;
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RaisedButton(
+                    onPressed: () async {
+                      var uri = 'sms:' +
+                          phoneController.text +
+                          '?body=' +
+                          keyControler.text;
                       launch(uri);
-                    });
-                  },
-                  child: Text("Send Encrypted Text"),
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: encryptedText,
-                decoration: InputDecoration(
-                  hintText: "Encrypted Text",
-                  labelText: "Encrypted Text Will Appear Here",
-                  border: OutlineInputBorder(),
+
+                      /* var result1 = await EncrytService()
+                      .getDecryptedText(result, keyControler.text);*/
+                    },
+                    child: Text("Send Key"),
+                  ),
+                  RaisedButton(
+                    onPressed: () async {
+                      var result = await EncrytService().getEncryptedText(
+                          msgController.text, keyControler.text);
+
+                      print(result);
+                      encryptedText.text = result;
+
+                      Timer(Duration(seconds: 2), () {
+                        var uri =
+                            'sms:' + phoneController.text + '?body=' + result;
+                        launch(uri);
+                      });
+                    },
+                    child: Text("Send Encrypted Text"),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: encryptedText,
+                  decoration: InputDecoration(
+                    hintText: "Encrypted Text",
+                    labelText: "Encrypted Text Will Appear Here",
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
