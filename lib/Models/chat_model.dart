@@ -1,4 +1,4 @@
-import '';
+import 'contact_model.dart';
 
 class ChatModel {
   final bool isTyping;
