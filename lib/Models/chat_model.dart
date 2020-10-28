@@ -17,24 +17,24 @@ class ChatModel {
   static List<ChatModel> list = [
 
     ChatModel(
-    isTyping: true,
+    isTyping: false,
     lastMessage: "hello!",
-    lastMessageTime: "2d",
+    lastMessageTime: "4 ",
     contact: ContactModel(name: "Shrestha"),
   ),
 
   ChatModel(
       isTyping: false,
       lastMessage: "Sure!, no problm",
-      lastMessageTime: "2d",
+      lastMessageTime: "2 ",
       contact: ContactModel(name: "Sonali"),
       ),
 
     ChatModel(
       isTyping: false,
       lastMessage: "Thank you",
-      lastMessageTime: "2d",
-      contact: ContactModel(name: "Guddi"),
+      lastMessageTime: "2 ",
+      contact: ContactModel(name: "Mummy"),
     ),
   ];
 

@@ -1,22 +1,24 @@
+import 'package:encrypted_message_app/Models/chat_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class HomeScreen extends StatefulWidget {
+
+class MainHomeScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _MainHomeScreenState createState() => _MainHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MainHomeScreenState extends State<MainHomeScreen> {
   List<ChatModel> list = ChatModel.list;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.mainColor,
+      backgroundColor: Colors.black87,
         appBar: AppBar(
         elevation: 0,
-          backgroundColor: Colors.mainColor,
+          backgroundColor: Colors.black87,
           title: Text(
             "Chat",
             style: TextStyle(
@@ -45,14 +47,17 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             ),
          child: TextField(
+           style: TextStyle(
+             color: Colors.white,
+           ),
            decoration: InputDecoration(
              prefixIcon: Icon(
                FontAwesomeIcons.search,
-               color: Colors.white54,
+               color: Colors.blue,
              ),
              hintText: "Search",
              hintStyle: TextStyle(
-               color: Colors.white54,
+               color: Colors.white,
              ),
            ),
          ),
@@ -63,11 +68,11 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (context, index) {
             return ListTile(
               onTap: () {
-                Navigator.of(context).push(
+                /*Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (_) => ChatItemPage(),
                   ),
-                );
+                );*/
               },
               leading: Container(
                 width: 50,
@@ -76,10 +81,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.all(
                     Radius.circular(100),
                   ),
-                  image: DecorationImage(
-                      image: ExactAssetImage(""),
-                  ),
                 ),
+                child: Icon(FontAwesomeIcons.user,
+                  color: Colors.blue,
+                size: 30.0,)
               ),
               title: Text(
                 list[index].contact.name,
@@ -106,25 +111,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(width: 25),
                   Text(
-                    list[index].lastMesasgeTime + "days ago",
+                    list[index].lastMessageTime + " days ago",
                     style: TextStyle(
                       color: Colors.white54
                     ),
-                  )
+                  ),
                 ],
-              )
-            )
+              ),
+            );
           }
             ),
-          )
+          ),
         ],
       ),
-            )
-          ],
-        ),
+      floatingActionButton: FloatingActionButton(
+        child: Icons(Icons.add),
       ),
+            );
 
-
-    );
   }
 }
