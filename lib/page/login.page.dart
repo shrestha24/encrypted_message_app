@@ -1,12 +1,6 @@
 import 'package:encrypted_message_app/page/signup.page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '';
-
-
-
-
-
 
 class MyHomePage extends StatefulWidget {
   @override
