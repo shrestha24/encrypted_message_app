@@ -24,14 +24,14 @@ class ChatModel {
   ),
 
   ChatModel(
-      isTyping: false
+      isTyping: false,
       lastMessage: "Sure!, no problm",
       lastMessageTime: "2d",
       contact: ContactModel(name: "Sonali"),
       ),
 
     ChatModel(
-      isTyping: false
+      isTyping: false,
       lastMessage: "Thank you",
       lastMessageTime: "2d",
       contact: ContactModel(name: "Guddi"),
