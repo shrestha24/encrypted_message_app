@@ -17,8 +17,10 @@ class _DecryptPageState extends State<DecryptPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        body: SingleChildScrollView(
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
                 keyboardType: TextInputType.text,
@@ -28,6 +30,9 @@ class _DecryptPageState extends State<DecryptPage> {
                   hintText: "Enter Encrypted Text",
                   labelText: "Encrypted Text",
                 ),
+              ),
+              SizedBox(
+                height: 20,
               ),
               TextField(
                 keyboardType: TextInputType.text,
