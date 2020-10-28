@@ -125,7 +125,13 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icons(Icons.add),
+        child:
+        Row(
+          children: <Widget>[
+            Text("New User"),
+            Icon(Icons.add)
+          ],
+        )
       ),
             );
 
