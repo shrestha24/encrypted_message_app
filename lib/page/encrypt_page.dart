@@ -17,87 +17,78 @@ class EncryptForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("ENCRYPT FORM"),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: senderPhoneController,
-                    decoration: InputDecoration(
-                      hintText: "Enter Sender Phone",
-                      labelText: "Sender Phone",
-                      border: OutlineInputBorder(),
-                    ),
+      appBar: AppBar(
+        title: Text("ENCRYPT FORM"),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: senderPhoneController,
+                  decoration: InputDecoration(
+                    hintText: "Enter Sender Phone",
+                    labelText: "Sender Phone",
+                    border: OutlineInputBorder(),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: recieverPhoneController,
-                    decoration: InputDecoration(
-                      hintText: "Enter Reciever Phone",
-                      labelText: " Reciever Phone",
-                      border: OutlineInputBorder(),
-                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: recieverPhoneController,
+                  decoration: InputDecoration(
+                    hintText: "Enter Reciever Phone",
+                    labelText: " Reciever Phone",
+                    border: OutlineInputBorder(),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: msgController,
-                    decoration: InputDecoration(
-                      hintText: "Enter String",
-                      labelText: "Message",
-                      border: OutlineInputBorder(),
-                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: msgController,
+                  decoration: InputDecoration(
+                    hintText: "Enter String",
+                    labelText: "Message",
+                    border: OutlineInputBorder(),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    RaisedButton(
-                      onPressed: () async {
-                        String key = senderPhoneController.text.trim() +
-                            recieverPhoneController.text.trim() +
-                            "abcdefghijkl";
-                        var result = await EncrytService()
-                            .getEncryptedText(msgController.text, key);
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RaisedButton(
+                    onPressed: () async {
+                      String key = senderPhoneController.text.trim() +
+                          recieverPhoneController.text.trim() +
+                          "abcdefghijkl";
+                      var result = await EncrytService()
+                          .getEncryptedText(msgController.text, key);
 
-                        print(result);
-                        encryptedText.text = result;
+                      print(result);
+                      encryptedText.text = result;
 
-                        Timer(Duration(seconds: 2), () {
-                          var uri = 'sms:' +
-                              recieverPhoneController.text +
-                              '?body=' +
-                              result;
-                          launch(uri);
-                        });
-                      },
-                      child: Text("Send Encrypted Text"),
-                    )
-                  ],
-                ),
-              ],
-            ),
+                      Timer(Duration(seconds: 2), () {
+                        var uri = 'sms:' +
+                            recieverPhoneController.text +
+                            '?body=' +
+                            result;
+                        launch(uri);
+                      });
+                    },
+                    child: Text("Send Encrypted Text"),
+                  )
+                ],
+              ),
+            ],
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: const Color(0xff03dac6),
-          foregroundColor: Colors.black,
-          onPressed: () {
-            Navigator.push(context,
-                new MaterialPageRoute(builder: (context) => DecryptPage()));
-          },
-          icon: Icon(Icons.forward),
-          label: Text('Next'),
-        ));
+      ),
+    );
   }
 }
