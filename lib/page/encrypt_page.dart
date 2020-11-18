@@ -7,7 +7,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class EncryptForm extends StatelessWidget {
   final msgController = TextEditingController();
-  final phoneController = TextEditingController();
+  final senderPhoneController = TextEditingController();
+  final recieverPhoneController = TextEditingController();
   final keyControler = TextEditingController();
   final encryptedText = TextEditingController();
   EncryptForm({Key key}) : super(key: key);
@@ -28,10 +29,21 @@ class EncryptForm extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
-                    controller: phoneController,
+                    controller: senderPhoneController,
                     decoration: InputDecoration(
-                      hintText: "Enter Phone",
-                      labelText: "Phone",
+                      hintText: "Enter Sender Phone",
+                      labelText: "Sender Phone",
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: recieverPhoneController,
+                    decoration: InputDecoration(
+                      hintText: "Enter Reciever Phone",
+                      labelText: " Reciever Phone",
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -47,44 +59,25 @@ class EncryptForm extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: keyControler,
-                    decoration: InputDecoration(
-                      hintText: "Enter key",
-                      labelText: "key",
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     RaisedButton(
                       onPressed: () async {
-                        var uri = 'sms:' +
-                            phoneController.text +
-                            '?body=' +
-                            keyControler.text;
-                        launch(uri);
-
-                        /* var result1 = await EncrytService()
-                      .getDecryptedText(result, keyControler.text);*/
-                      },
-                      child: Text("Send Key"),
-                    ),
-                    RaisedButton(
-                      onPressed: () async {
-                        var result = await EncrytService().getEncryptedText(
-                            msgController.text, keyControler.text);
+                        String key = senderPhoneController.text.trim() +
+                            recieverPhoneController.text.trim() +
+                            "abcdefghijkl";
+                        var result = await EncrytService()
+                            .getEncryptedText(msgController.text, key);
 
                         print(result);
                         encryptedText.text = result;
 
                         Timer(Duration(seconds: 2), () {
-                          var uri =
-                              'sms:' + phoneController.text + '?body=' + result;
+                          var uri = 'sms:' +
+                              recieverPhoneController.text +
+                              '?body=' +
+                              result;
                           launch(uri);
                         });
                       },
