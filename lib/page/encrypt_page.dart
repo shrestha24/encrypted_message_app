@@ -12,7 +12,7 @@ class EncryptForm extends StatelessWidget {
   final keyControler = TextEditingController();
   final encryptedText = TextEditingController();
   EncryptForm({Key key}) : super(key: key);
-  String text = "Encrypted Text Will Appera here";
+  String text = "Encrypted Text Will Appear here";
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,8 @@ class EncryptForm extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: <Widget>[
+
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
@@ -63,6 +64,11 @@ class EncryptForm extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RaisedButton(
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(28.0)
+                    ),
                     onPressed: () async {
                       String key = senderPhoneController.text.trim() +
                           recieverPhoneController.text.trim() +

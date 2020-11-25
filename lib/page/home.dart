@@ -46,7 +46,7 @@ class Home extends StatelessWidget {
                             Text(
                               "Send Encrypted Message ",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 35),
+                                  TextStyle(color: Colors.white, fontSize: 25),
                             ),
                           ],
                         ),
@@ -86,7 +86,7 @@ class Home extends StatelessWidget {
                             Text(
                               "Decrypt Recieved Message ",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 35),
+                                  TextStyle(color: Colors.white, fontSize: 24),
                             ),
                           ],
                         ),
